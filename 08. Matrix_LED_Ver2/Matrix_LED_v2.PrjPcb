@@ -64,7 +64,7 @@ AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
 AnnotateSuffix=
 AnnotateScope=All
-AnnotateOrder=-1
+AnnotateOrder=0
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 ClassGenCCAutoEnabled=1
@@ -73,6 +73,10 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=NTKDBEWI
+
+[GeneratedDocument1]
+DocumentPath=Project Outputs for Matrix_LED_v2\Design Rule Check - MatrixLED_v2_PCB.html
+DItemRevisionGUID=
 
 [Configuration1]
 Name=Sources

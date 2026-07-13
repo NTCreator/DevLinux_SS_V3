@@ -74,10 +74,6 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ZKAEWYZX
 
-[GeneratedDocument1]
-DocumentPath=Project Outputs for Buzzer_Module_v2\Design Rule Check - Buzzer_v2_PCB.html
-DItemRevisionGUID=
-
 [Configuration1]
 Name=Sources
 ParameterCount=0
