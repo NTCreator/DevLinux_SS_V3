@@ -1,0 +1,30 @@
+[ProjectGroup]
+Version=1.0
+[Project1]
+ProjectPath=15. HC_SR04 Module_Ver2\HC_SR04 Module_Ver2\HC_SR04 Module_Ver2.PrjPcb
+[Project2]
+ProjectPath=01. TactSwitch_Module_Ver2\TactSwitch_Module_v2.PrjPcb
+[Project3]
+ProjectPath=06. RingLED_Ver2\RingLED_v2.PrjPcb
+[Project4]
+ProjectPath=07. 7-SegmentLED_Ver2\7-SegmentLED_v2.PrjPcb
+[Project5]
+ProjectPath=08. Matrix_LED_Ver2\Matrix_LED_v2.PrjPcb
+[Project6]
+ProjectPath=10. DHT11 Module_Ver2\DHT11_Module_v2.PrjPcb
+[Project7]
+ProjectPath=11. MQ_Module_Ver2\MQ-2_Module_v2.PrjPcb
+[Project8]
+ProjectPath=18. Sound Module_Ver2\Sound Module_v2.PrjPcb
+[Project9]
+ProjectPath=19. LDR_Ver2\LDR_Module_v2.PrjPcb
+[Project10]
+ProjectPath=25. G_Humi Module_Ver2\G_Humi_v2.PrjPcb
+[Project11]
+ProjectPath=13. Buzzer_Module_Ver2\Buzzer_Module_v2.PrjPcb
+[Project12]
+ProjectPath=24. RV09-S_Module_Ver2\RV09-S_Module_v2.PrjPcb
+[Project13]
+ProjectPath=25. DC Motor\DC Motor.PrjPcb
+[Project14]
+ProjectPath=C:\Users\Public\Documents\Altium\AD21\Library\namnt_Lib\namnt_Lib.LibPkg
