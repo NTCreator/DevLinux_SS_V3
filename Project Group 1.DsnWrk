@@ -30,3 +30,9 @@ ProjectPath=25. DC Motor\DC Motor.PrjPcb
 ProjectPath=02. R-G-B_LED Module_Ver2\R-G-B_LED Module_v2.PrjPcb
 [Project15]
 ProjectPath=08. Matrix_LED_Ver2\Matrix_LED_v2.PrjPcb
+[Project16]
+ProjectPath=20. MPU6050 Module_Ver2\MPU6050_Module_v2.PrjPcb
+[Project17]
+ProjectPath=21. ColorSS Module_Ver2\ColorSS_Module_v2.PrjPcb
+[Project18]
+ProjectPath=09. SSD1306_Module_Ver2\SSD1306_v2.PrjPcb
