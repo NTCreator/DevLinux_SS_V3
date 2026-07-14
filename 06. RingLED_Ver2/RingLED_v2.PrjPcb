@@ -74,6 +74,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YWPPPCNU
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for RingLED_v2\Design Rule Check - RGB_Ring_v2_PCB.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0

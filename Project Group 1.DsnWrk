@@ -15,24 +15,26 @@ ProjectPath=11. MQ_Module_Ver2\MQ-2_Module_v2.PrjPcb
 [Project7]
 ProjectPath=18. Sound Module_Ver2\Sound Module_v2.PrjPcb
 [Project8]
-ProjectPath=19. LDR_Ver2\LDR_Module_v2.PrjPcb
-[Project9]
-ProjectPath=25. G_Humi Module_Ver2\G_Humi_v2.PrjPcb
-[Project10]
 ProjectPath=13. Buzzer_Module_Ver2\Buzzer_Module_v2.PrjPcb
-[Project11]
+[Project9]
 ProjectPath=24. RV09-S_Module_Ver2\RV09-S_Module_v2.PrjPcb
-[Project12]
+[Project10]
 ProjectPath=15. HC_SR04 Module_Ver2\HC_SR04 Module_Ver2.PrjPcb
-[Project13]
+[Project11]
 ProjectPath=25. DC Motor\DC Motor.PrjPcb
-[Project14]
+[Project12]
 ProjectPath=02. R-G-B_LED Module_Ver2\R-G-B_LED Module_v2.PrjPcb
-[Project15]
+[Project13]
 ProjectPath=08. Matrix_LED_Ver2\Matrix_LED_v2.PrjPcb
+[Project14]
+ProjectPath=28. JoyStick Module\JoyStick Module.PrjPcb
+[Project15]
+ProjectPath=25. G_Humi Module_Ver2\G_Humi_v2.PrjPcb
 [Project16]
 ProjectPath=20. MPU6050 Module_Ver2\MPU6050_Module_v2.PrjPcb
 [Project17]
-ProjectPath=21. ColorSS Module_Ver2\ColorSS_Module_v2.PrjPcb
-[Project18]
 ProjectPath=09. SSD1306_Module_Ver2\SSD1306_v2.PrjPcb
+[Project18]
+ProjectPath=14. Detect_IR_Ver2\Detect_IR_v2.PrjPcb
+[Project19]
+ProjectPath=21. ColorSS Module_Ver2\ColorSS_Module_v2.PrjPcb

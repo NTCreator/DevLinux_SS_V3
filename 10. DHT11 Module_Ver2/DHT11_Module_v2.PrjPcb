@@ -74,6 +74,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ZUDFFCPS
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for DHT11_Module_v2\Design Rule Check - DHT11_v2_PCB.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
