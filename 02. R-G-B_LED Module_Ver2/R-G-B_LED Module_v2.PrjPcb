@@ -74,6 +74,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=E64163DB-1920-43C1-8D62-266280772BB3
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for R-G-B_LED Module_v2\Design Rule Check - LED Module_v2_PCB.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
