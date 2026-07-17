@@ -74,6 +74,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=VGFSTBND
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for Detect_IR_v2\Design Rule Check - Detect_IR_v2_PCB.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0

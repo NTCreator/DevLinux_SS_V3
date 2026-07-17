@@ -74,6 +74,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=TPMRZJBL
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for MQ-2_Module_v2\Design Rule Check - MQ-2_v2_PCB.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
