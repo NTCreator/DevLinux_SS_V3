@@ -74,6 +74,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FEPTLQFP
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for Rain Module_v2\Design Rule Check - Rain Module_v2_PCB.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0

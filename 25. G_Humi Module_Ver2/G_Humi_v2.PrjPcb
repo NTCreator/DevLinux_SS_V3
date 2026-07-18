@@ -74,6 +74,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FEPTLQFP
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for G_Humi_v2\Design Rule Check - G_Humi_v2_PCB.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
