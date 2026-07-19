@@ -1,0 +1,798 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD21\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">7/19/2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">10:24:46 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc" class="file"><acronym title="D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc">D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">150</td></tr>
+</table>
+</td>
+</table><a name="ID12TUCSDC4AUCC2OTFCXYLBQ4TP1FAHQEQZX4QZFVEERU5W42UYEP"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGXILE5KJUILONQQOTSW1DAUIEM5EKN5M3EAENUG3WKSLJADTZFGB">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCSTEGRV2YAQ4IBXZZ32FKNF4SFE0WLHGYF3BHGGMU1KWY121JY5M">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHI2NGKRSZCVGGHQN0VZQL5PRFIQFWDJCRVYLFAP1J4NKTDQWOSSM">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3FMYWFM241BYKS4M1SLWVP3H1DHDY4WUZDHM0GKZDAG0A0AK523H">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDS4FML3UCVV4YJPZOEBWP2ENEPE0SHXA3MORUOVKYJKOWGGNIRXRL">Width Constraint (Min=0.254mm) (Max=0.6mm) (Preferred=0.4mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3TSMNAICHHGTKSBZRQUCALGTTNZHIQJ2OVWR1WMPPO5XMDCKU4X">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID05RKIJSEYJZGKRIT3E3SRV0SAHR3JBZSUYBA2JMFXHSXITMBN1EI">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRTSLVQGG4X4KMEYBYZPJ5SDHM4VPDYQJ4MJHPWIJPJVW2RZHJN">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFASUDIHT3R3FO0J5E0OLAD2WLJUBZ4CREGH5OTMDLPFGJERNYJCG">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">9</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZIHRAHQGS0XKCWF1ACXGWOCRNMUGYKORC0MZ2QI0K1ND1E2HG34G">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">110</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1QCZ0CFLDQ3GM0GJFOMC0SL0TEPIBARCYFZA1F4C45SV4L5P4FJ">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1OHHND5TAV3TE0D3ZCWKJNATCOMIIOOE3RE2YNLWLRXT04SEJYZH">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMCBBDQVW1SN0LI5W1SGRUWJERHTZZC4UQWJ10FO0W51VUHLZIOI">Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH'))</a></td>
+<td class="column2">19</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDK2TXHXCNT5Z4LQXITN4BSRUEONKSDSIGFPTTXSBAZKSSO2WULILI">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">150</td>
+</tr>
+</table><br><a name="IDRTSLVQGG4X4KMEYBYZPJ5SDHM4VPDYQJ4MJHPWIJPJVW2RZHJN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3300.332mil|Location2.X=3307.999mil|Location1.Y=2141.31mil|Location2.Y=2148.977mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3300.332mil|Location2.X=3307.999mil|Location1.Y=2141.31mil|Location2.Y=2148.977mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 0.254mm) Between Pad H1-1(3.026mm,-13.553mm) on Multi-Layer And Pad H1-1(3.77mm,-13.55mm) on Multi-Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3221.592mil|Location2.X=3229.259mil|Location1.Y=2141.31mil|Location2.Y=2148.977mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3221.592mil|Location2.X=3229.259mil|Location1.Y=2141.31mil|Location2.Y=2148.977mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 0.254mm) Between Pad H1-2(1.026mm,-13.553mm) on Multi-Layer And Pad H1-2(1.27mm,-13.55mm) on Multi-Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3142.852mil|Location2.X=3150.519mil|Location1.Y=2141.31mil|Location2.Y=2148.977mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3142.852mil|Location2.X=3150.519mil|Location1.Y=2141.31mil|Location2.Y=2148.977mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 0.254mm) Between Pad H1-3(-0.974mm,-13.553mm) on Multi-Layer And Pad H1-3(-1.23mm,-13.55mm) on Multi-Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3064.128mil|Location2.X=3071.794mil|Location1.Y=2141.31mil|Location2.Y=2148.977mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3064.128mil|Location2.X=3071.794mil|Location1.Y=2141.31mil|Location2.Y=2148.977mil|Absolute=True">Hole To Hole Clearance Constraint: (Collision &lt; 0.254mm) Between Pad H1-4(-2.974mm,-13.553mm) on Multi-Layer And Pad H1-4(-3.73mm,-13.55mm) on Multi-Layer Pad/Via Touching Holes</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDFASUDIHT3R3FO0J5E0OLAD2WLJUBZ4CREGH5OTMDLPFGJERNYJCG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3420.359mil|Location2.X=3431.609mil|Location1.Y=2454.887mil|Location2.Y=2466.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3420.359mil|Location2.X=3431.609mil|Location1.Y=2454.887mil|Location2.Y=2466.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.174mm &lt; 0.254mm) Between Pad C2-2(6.197mm,-4.88mm) on Top Layer And Via (6.12mm,-6.131mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.174mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3323.115mil|Location2.X=3334.365mil|Location1.Y=2454.885mil|Location2.Y=2466.135mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3323.115mil|Location2.X=3334.365mil|Location1.Y=2454.885mil|Location2.Y=2466.135mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.174mm &lt; 0.254mm) Between Pad C3-2(3.724mm,-4.88mm) on Top Layer And Via (3.65mm,-6.131mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.174mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3129.753mil|Location2.X=3141.003mil|Location1.Y=2454.885mil|Location2.Y=2466.135mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3129.753mil|Location2.X=3141.003mil|Location1.Y=2454.885mil|Location2.Y=2466.135mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.174mm &lt; 0.254mm) Between Pad C5-2(-1.221mm,-4.88mm) on Top Layer And Via (-1.261mm,-6.131mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.174mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3029.808mil|Location2.X=3041.058mil|Location1.Y=2454.886mil|Location2.Y=2466.136mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3029.808mil|Location2.X=3041.058mil|Location1.Y=2454.886mil|Location2.Y=2466.136mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.174mm &lt; 0.254mm) Between Pad C6-2(-3.694mm,-4.88mm) on Top Layer And Via (-3.8mm,-6.131mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.174mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2936.501mil|Location2.X=2947.751mil|Location1.Y=2454.887mil|Location2.Y=2466.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2936.501mil|Location2.X=2947.751mil|Location1.Y=2454.887mil|Location2.Y=2466.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.174mm &lt; 0.254mm) Between Pad C7-2(-6.167mm,-4.88mm) on Top Layer And Via (-6.17mm,-6.131mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.174mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3263.977mil|Location2.X=3275.227mil|Location1.Y=2139.651mil|Location2.Y=2150.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3263.977mil|Location2.X=3275.227mil|Location1.Y=2139.651mil|Location2.Y=2150.901mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.253mm &lt; 0.254mm) Between Pad H1-1(3.026mm,-13.553mm) on Multi-Layer And Pad H1-2(1.27mm,-13.55mm) on Multi-Layer [Top Solder] Mask Sliver [0.253mm] / [Bottom Solder] Mask Sliver [0.253mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3096.663mil|Location2.X=3107.913mil|Location1.Y=2139.585mil|Location2.Y=2150.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3096.663mil|Location2.X=3107.913mil|Location1.Y=2139.585mil|Location2.Y=2150.835mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.241mm &lt; 0.254mm) Between Pad H1-3(-1.23mm,-13.55mm) on Multi-Layer And Pad H1-4(-2.974mm,-13.553mm) on Multi-Layer [Top Solder] Mask Sliver [0.241mm] / [Bottom Solder] Mask Sliver [0.241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3429.808mil|Location2.X=3441.058mil|Location1.Y=2290.135mil|Location2.Y=2301.385mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3429.808mil|Location2.X=3441.058mil|Location1.Y=2290.135mil|Location2.Y=2301.385mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.152mm &lt; 0.254mm) Between Pad R1-2(6.147mm,-10.38mm) on Bottom Layer And Via (6.36mm,-9.15mm) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [0.152mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.595mil|Location2.X=3091.845mil|Location1.Y=2605.005mil|Location2.Y=2616.255mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.595mil|Location2.X=3091.845mil|Location1.Y=2605.005mil|Location2.Y=2616.255mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.057mm &lt; 0.254mm) Between Pad U7-2(-2.45mm,-1.15mm) on Top Layer And Via (-2.51mm,-2.26mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.057mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDZIHRAHQGS0XKCWF1ACXGWOCRNMUGYKORC0MZ2QI0K1ND1E2HG34G"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3304.434mil|Location2.X=3312.101mil|Location1.Y=3322.545mil|Location2.Y=3330.211mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3304.434mil|Location2.X=3312.101mil|Location1.Y=3322.545mil|Location2.Y=3330.211mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (3.03mm,16.45mm) on Top Overlay And Pad U3-4(2.45mm,16.15mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3304.434mil|Location2.X=3312.101mil|Location1.Y=2771.363mil|Location2.Y=2779.03mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3304.434mil|Location2.X=3312.101mil|Location1.Y=2771.363mil|Location2.Y=2779.03mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (3.03mm,2.45mm) on Top Overlay And Pad U7-4(2.45mm,2.15mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3028.844mil|Location2.X=3036.51mil|Location1.Y=3322.545mil|Location2.Y=3330.211mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3028.844mil|Location2.X=3036.51mil|Location1.Y=3322.545mil|Location2.Y=3330.211mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (-3.97mm,16.45mm) on Top Overlay And Pad U4-4(-4.55mm,16.15mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3028.844mil|Location2.X=3036.51mil|Location1.Y=2771.364mil|Location2.Y=2779.03mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3028.844mil|Location2.X=3036.51mil|Location1.Y=2771.364mil|Location2.Y=2779.03mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (-3.97mm,2.45mm) on Top Overlay And Pad U6-4(-4.55mm,2.15mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3539.453mil|Location2.X=3550.703mil|Location1.Y=2560.621mil|Location2.Y=2571.871mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3539.453mil|Location2.X=3550.703mil|Location1.Y=2560.621mil|Location2.Y=2571.871mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.045mm &lt; 0.254mm) Between Pad C1-1(8.67mm,-3.38mm) on Top Layer And Track (8.086mm,-2.784mm)(9.254mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.045mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3500.902mil|Location2.X=3512.152mil|Location1.Y=2520.357mil|Location2.Y=2531.607mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3500.902mil|Location2.X=3512.152mil|Location1.Y=2520.357mil|Location2.Y=2531.607mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C1-1(8.67mm,-3.38mm) on Top Layer And Track (8.086mm,-5.502mm)(8.086mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3504.752mil|Location2.X=3516.002mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3504.752mil|Location2.X=3516.002mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C1-1(8.67mm,-3.38mm) on Top Layer And Track (8.264mm,-4.232mm)(8.264mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3536.752mil|Location2.X=3548.002mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3536.752mil|Location2.X=3548.002mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C1-1(8.67mm,-3.38mm) on Top Layer And Track (9.076mm,-4.232mm)(9.076mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3540.603mil|Location2.X=3551.853mil|Location1.Y=2520.357mil|Location2.Y=2531.607mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3540.603mil|Location2.X=3551.853mil|Location1.Y=2520.357mil|Location2.Y=2531.607mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C1-1(8.67mm,-3.38mm) on Top Layer And Track (9.254mm,-5.502mm)(9.254mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3500.902mil|Location2.X=3512.152mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3500.902mil|Location2.X=3512.152mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C1-2(8.67mm,-4.88mm) on Top Layer And Track (8.086mm,-5.502mm)(8.086mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3539.453mil|Location2.X=3550.703mil|Location1.Y=2459.909mil|Location2.Y=2471.159mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3539.453mil|Location2.X=3550.703mil|Location1.Y=2459.909mil|Location2.Y=2471.159mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.071mm &lt; 0.254mm) Between Pad C1-2(8.67mm,-4.88mm) on Top Layer And Track (8.086mm,-5.502mm)(9.254mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3504.752mil|Location2.X=3516.002mil|Location1.Y=2502.593mil|Location2.Y=2513.843mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3504.752mil|Location2.X=3516.002mil|Location1.Y=2502.593mil|Location2.Y=2513.843mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C1-2(8.67mm,-4.88mm) on Top Layer And Track (8.264mm,-4.232mm)(8.264mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3536.752mil|Location2.X=3548.002mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3536.752mil|Location2.X=3548.002mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C1-2(8.67mm,-4.88mm) on Top Layer And Track (9.076mm,-4.232mm)(9.076mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3540.603mil|Location2.X=3551.853mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3540.603mil|Location2.X=3551.853mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C1-2(8.67mm,-4.88mm) on Top Layer And Track (9.254mm,-5.502mm)(9.254mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3403.546mil|Location2.X=3414.796mil|Location1.Y=2520.36mil|Location2.Y=2531.61mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3403.546mil|Location2.X=3414.796mil|Location1.Y=2520.36mil|Location2.Y=2531.61mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C2-1(6.197mm,-3.38mm) on Top Layer And Track (5.613mm,-2.784mm)(5.613mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.696mil|Location2.X=3415.946mil|Location1.Y=2560.623mil|Location2.Y=2571.873mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.696mil|Location2.X=3415.946mil|Location1.Y=2560.623mil|Location2.Y=2571.873mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.045mm &lt; 0.254mm) Between Pad C2-1(6.197mm,-3.38mm) on Top Layer And Track (5.613mm,-2.784mm)(6.781mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.045mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3407.396mil|Location2.X=3418.646mil|Location1.Y=2518.438mil|Location2.Y=2529.688mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3407.396mil|Location2.X=3418.646mil|Location1.Y=2518.438mil|Location2.Y=2529.688mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C2-1(6.197mm,-3.38mm) on Top Layer And Track (5.791mm,-4.028mm)(5.791mm,-4.232mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3439.397mil|Location2.X=3450.647mil|Location1.Y=2518.438mil|Location2.Y=2529.688mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3439.397mil|Location2.X=3450.647mil|Location1.Y=2518.438mil|Location2.Y=2529.688mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C2-1(6.197mm,-3.38mm) on Top Layer And Track (6.604mm,-4.028mm)(6.604mm,-4.232mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3443.247mil|Location2.X=3454.497mil|Location1.Y=2520.36mil|Location2.Y=2531.61mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3443.247mil|Location2.X=3454.497mil|Location1.Y=2520.36mil|Location2.Y=2531.61mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C2-1(6.197mm,-3.38mm) on Top Layer And Track (6.781mm,-5.502mm)(6.781mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3403.547mil|Location2.X=3414.797mil|Location1.Y=2461.304mil|Location2.Y=2472.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3403.547mil|Location2.X=3414.797mil|Location1.Y=2461.304mil|Location2.Y=2472.554mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C2-2(6.197mm,-4.88mm) on Top Layer And Track (5.613mm,-2.784mm)(5.613mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.696mil|Location2.X=3415.946mil|Location1.Y=2459.91mil|Location2.Y=2471.16mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.696mil|Location2.X=3415.946mil|Location1.Y=2459.91mil|Location2.Y=2471.16mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.071mm &lt; 0.254mm) Between Pad C2-2(6.197mm,-4.88mm) on Top Layer And Track (5.613mm,-5.502mm)(6.781mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3407.397mil|Location2.X=3418.647mil|Location1.Y=2502.596mil|Location2.Y=2513.846mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3407.397mil|Location2.X=3418.647mil|Location1.Y=2502.596mil|Location2.Y=2513.846mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C2-2(6.197mm,-4.88mm) on Top Layer And Track (5.791mm,-4.028mm)(5.791mm,-4.232mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3439.398mil|Location2.X=3450.648mil|Location1.Y=2502.595mil|Location2.Y=2513.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3439.398mil|Location2.X=3450.648mil|Location1.Y=2502.595mil|Location2.Y=2513.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C2-2(6.197mm,-4.88mm) on Top Layer And Track (6.604mm,-4.028mm)(6.604mm,-4.232mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3443.247mil|Location2.X=3454.497mil|Location1.Y=2461.304mil|Location2.Y=2472.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3443.247mil|Location2.X=3454.497mil|Location1.Y=2461.304mil|Location2.Y=2472.554mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C2-2(6.197mm,-4.88mm) on Top Layer And Track (6.781mm,-5.502mm)(6.781mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3306.189mil|Location2.X=3317.439mil|Location1.Y=2520.358mil|Location2.Y=2531.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3306.189mil|Location2.X=3317.439mil|Location1.Y=2520.358mil|Location2.Y=2531.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C3-1(3.724mm,-3.38mm) on Top Layer And Track (3.14mm,-2.784mm)(3.14mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3307.339mil|Location2.X=3318.589mil|Location1.Y=2560.622mil|Location2.Y=2571.872mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3307.339mil|Location2.X=3318.589mil|Location1.Y=2560.622mil|Location2.Y=2571.872mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.045mm &lt; 0.254mm) Between Pad C3-1(3.724mm,-3.38mm) on Top Layer And Track (3.14mm,-2.784mm)(4.308mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.045mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.039mil|Location2.X=3321.289mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.039mil|Location2.X=3321.289mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C3-1(3.724mm,-3.38mm) on Top Layer And Track (3.318mm,-4.232mm)(3.318mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3342.04mil|Location2.X=3353.29mil|Location1.Y=2518.437mil|Location2.Y=2529.687mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3342.04mil|Location2.X=3353.29mil|Location1.Y=2518.437mil|Location2.Y=2529.687mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C3-1(3.724mm,-3.38mm) on Top Layer And Track (4.131mm,-4.232mm)(4.131mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3345.89mil|Location2.X=3357.14mil|Location1.Y=2559.728mil|Location2.Y=2570.978mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3345.89mil|Location2.X=3357.14mil|Location1.Y=2559.728mil|Location2.Y=2570.978mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C3-1(3.724mm,-3.38mm) on Top Layer And Track (4.308mm,-2.784mm)(4.308mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3306.189mil|Location2.X=3317.439mil|Location1.Y=2461.302mil|Location2.Y=2472.552mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3306.189mil|Location2.X=3317.439mil|Location1.Y=2461.302mil|Location2.Y=2472.552mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C3-2(3.724mm,-4.88mm) on Top Layer And Track (3.14mm,-2.784mm)(3.14mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.74mil|Location2.X=3355.99mil|Location1.Y=2459.909mil|Location2.Y=2471.159mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3344.74mil|Location2.X=3355.99mil|Location1.Y=2459.909mil|Location2.Y=2471.159mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.071mm &lt; 0.254mm) Between Pad C3-2(3.724mm,-4.88mm) on Top Layer And Track (3.14mm,-5.502mm)(4.308mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.039mil|Location2.X=3321.289mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.039mil|Location2.X=3321.289mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C3-2(3.724mm,-4.88mm) on Top Layer And Track (3.318mm,-4.232mm)(3.318mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3342.04mil|Location2.X=3353.29mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3342.04mil|Location2.X=3353.29mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C3-2(3.724mm,-4.88mm) on Top Layer And Track (4.131mm,-4.232mm)(4.131mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3345.89mil|Location2.X=3357.14mil|Location1.Y=2500.672mil|Location2.Y=2511.922mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3345.89mil|Location2.X=3357.14mil|Location1.Y=2500.672mil|Location2.Y=2511.922mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C3-2(3.724mm,-4.88mm) on Top Layer And Track (4.308mm,-2.784mm)(4.308mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3209.982mil|Location2.X=3221.232mil|Location1.Y=2560.623mil|Location2.Y=2571.873mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3209.982mil|Location2.X=3221.232mil|Location1.Y=2560.623mil|Location2.Y=2571.873mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.045mm &lt; 0.254mm) Between Pad C4-1(1.251mm,-3.38mm) on Top Layer And Track (0.667mm,-2.784mm)(1.836mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.045mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3208.832mil|Location2.X=3220.082mil|Location1.Y=2520.359mil|Location2.Y=2531.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3208.832mil|Location2.X=3220.082mil|Location1.Y=2520.359mil|Location2.Y=2531.609mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C4-1(1.251mm,-3.38mm) on Top Layer And Track (0.667mm,-5.502mm)(0.667mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3212.683mil|Location2.X=3223.933mil|Location1.Y=2518.438mil|Location2.Y=2529.688mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3212.683mil|Location2.X=3223.933mil|Location1.Y=2518.438mil|Location2.Y=2529.688mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C4-1(1.251mm,-3.38mm) on Top Layer And Track (0.845mm,-4.232mm)(0.845mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3244.683mil|Location2.X=3255.933mil|Location1.Y=2518.438mil|Location2.Y=2529.688mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3244.683mil|Location2.X=3255.933mil|Location1.Y=2518.438mil|Location2.Y=2529.688mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C4-1(1.251mm,-3.38mm) on Top Layer And Track (1.658mm,-4.232mm)(1.658mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3248.533mil|Location2.X=3259.783mil|Location1.Y=2520.359mil|Location2.Y=2531.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3248.533mil|Location2.X=3259.783mil|Location1.Y=2520.359mil|Location2.Y=2531.609mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C4-1(1.251mm,-3.38mm) on Top Layer And Track (1.836mm,-5.502mm)(1.836mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3208.832mil|Location2.X=3220.082mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3208.832mil|Location2.X=3220.082mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C4-2(1.251mm,-4.88mm) on Top Layer And Track (0.667mm,-5.502mm)(0.667mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3247.384mil|Location2.X=3258.634mil|Location1.Y=2459.91mil|Location2.Y=2471.16mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3247.384mil|Location2.X=3258.634mil|Location1.Y=2459.91mil|Location2.Y=2471.16mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.071mm &lt; 0.254mm) Between Pad C4-2(1.251mm,-4.88mm) on Top Layer And Track (0.667mm,-5.502mm)(1.836mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3212.683mil|Location2.X=3223.933mil|Location1.Y=2502.595mil|Location2.Y=2513.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3212.683mil|Location2.X=3223.933mil|Location1.Y=2502.595mil|Location2.Y=2513.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C4-2(1.251mm,-4.88mm) on Top Layer And Track (0.845mm,-4.232mm)(0.845mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3244.683mil|Location2.X=3255.933mil|Location1.Y=2502.595mil|Location2.Y=2513.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3244.683mil|Location2.X=3255.933mil|Location1.Y=2502.595mil|Location2.Y=2513.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C4-2(1.251mm,-4.88mm) on Top Layer And Track (1.658mm,-4.232mm)(1.658mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3248.533mil|Location2.X=3259.783mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3248.533mil|Location2.X=3259.783mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C4-2(1.251mm,-4.88mm) on Top Layer And Track (1.836mm,-5.502mm)(1.836mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.178mil|Location2.X=3162.428mil|Location1.Y=2559.728mil|Location2.Y=2570.978mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.178mil|Location2.X=3162.428mil|Location1.Y=2559.728mil|Location2.Y=2570.978mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C5-1(-1.221mm,-3.38mm) on Top Layer And Track (-0.637mm,-2.784mm)(-0.637mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3147.327mil|Location2.X=3158.577mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3147.327mil|Location2.X=3158.577mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C5-1(-1.221mm,-3.38mm) on Top Layer And Track (-0.815mm,-4.028mm)(-0.815mm,-4.232mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.328mil|Location2.X=3126.578mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.328mil|Location2.X=3126.578mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C5-1(-1.221mm,-3.38mm) on Top Layer And Track (-1.628mm,-4.028mm)(-1.628mm,-4.232mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3150.028mil|Location2.X=3161.278mil|Location1.Y=2560.622mil|Location2.Y=2571.872mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3150.028mil|Location2.X=3161.278mil|Location1.Y=2560.622mil|Location2.Y=2571.872mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.045mm &lt; 0.254mm) Between Pad C5-1(-1.221mm,-3.38mm) on Top Layer And Track (-1.806mm,-2.784mm)(-0.637mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.045mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3111.477mil|Location2.X=3122.727mil|Location1.Y=2520.358mil|Location2.Y=2531.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3111.477mil|Location2.X=3122.727mil|Location1.Y=2520.358mil|Location2.Y=2531.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C5-1(-1.221mm,-3.38mm) on Top Layer And Track (-1.806mm,-2.784mm)(-1.806mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.178mil|Location2.X=3162.428mil|Location1.Y=2500.672mil|Location2.Y=2511.922mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.178mil|Location2.X=3162.428mil|Location1.Y=2500.672mil|Location2.Y=2511.922mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C5-2(-1.221mm,-4.88mm) on Top Layer And Track (-0.637mm,-2.784mm)(-0.637mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3147.327mil|Location2.X=3158.577mil|Location1.Y=2502.593mil|Location2.Y=2513.843mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3147.327mil|Location2.X=3158.577mil|Location1.Y=2502.593mil|Location2.Y=2513.843mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C5-2(-1.221mm,-4.88mm) on Top Layer And Track (-0.815mm,-4.028mm)(-0.815mm,-4.232mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.328mil|Location2.X=3126.578mil|Location1.Y=2502.593mil|Location2.Y=2513.843mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.328mil|Location2.X=3126.578mil|Location1.Y=2502.593mil|Location2.Y=2513.843mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C5-2(-1.221mm,-4.88mm) on Top Layer And Track (-1.628mm,-4.028mm)(-1.628mm,-4.232mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3111.477mil|Location2.X=3122.727mil|Location1.Y=2461.302mil|Location2.Y=2472.552mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3111.477mil|Location2.X=3122.727mil|Location1.Y=2461.302mil|Location2.Y=2472.552mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C5-2(-1.221mm,-4.88mm) on Top Layer And Track (-1.806mm,-2.784mm)(-1.806mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3112.626mil|Location2.X=3123.876mil|Location1.Y=2459.909mil|Location2.Y=2471.159mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3112.626mil|Location2.X=3123.876mil|Location1.Y=2459.909mil|Location2.Y=2471.159mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.071mm &lt; 0.254mm) Between Pad C5-2(-1.221mm,-4.88mm) on Top Layer And Track (-1.806mm,-5.502mm)(-0.637mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3034.154mil|Location2.X=3041.82mil|Location1.Y=2526.151mil|Location2.Y=2533.817mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3034.154mil|Location2.X=3041.82mil|Location1.Y=2526.151mil|Location2.Y=2533.817mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C6-1(-3.694mm,-3.38mm) on Top Layer And Text "C9" (-4.751mm,-5.048mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3053.82mil|Location2.X=3065.07mil|Location1.Y=2520.358mil|Location2.Y=2531.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3053.82mil|Location2.X=3065.07mil|Location1.Y=2520.358mil|Location2.Y=2531.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C6-1(-3.694mm,-3.38mm) on Top Layer And Track (-3.11mm,-5.502mm)(-3.11mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3049.97mil|Location2.X=3061.22mil|Location1.Y=2518.437mil|Location2.Y=2529.687mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3049.97mil|Location2.X=3061.22mil|Location1.Y=2518.437mil|Location2.Y=2529.687mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C6-1(-3.694mm,-3.38mm) on Top Layer And Track (-3.288mm,-4.232mm)(-3.288mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3017.97mil|Location2.X=3029.22mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3017.97mil|Location2.X=3029.22mil|Location1.Y=2518.436mil|Location2.Y=2529.686mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C6-1(-3.694mm,-3.38mm) on Top Layer And Track (-4.101mm,-4.232mm)(-4.101mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3015.268mil|Location2.X=3026.518mil|Location1.Y=2560.621mil|Location2.Y=2571.871mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3015.268mil|Location2.X=3026.518mil|Location1.Y=2560.621mil|Location2.Y=2571.871mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.045mm &lt; 0.254mm) Between Pad C6-1(-3.694mm,-3.38mm) on Top Layer And Track (-4.278mm,-2.784mm)(-3.11mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.045mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3014.119mil|Location2.X=3025.369mil|Location1.Y=2520.358mil|Location2.Y=2531.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3014.119mil|Location2.X=3025.369mil|Location1.Y=2520.358mil|Location2.Y=2531.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C6-1(-3.694mm,-3.38mm) on Top Layer And Track (-4.278mm,-5.502mm)(-4.278mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3017.06mil|Location2.X=3024.727mil|Location1.Y=2476.167mil|Location2.Y=2483.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3017.06mil|Location2.X=3024.727mil|Location1.Y=2476.167mil|Location2.Y=2483.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C6-2(-3.694mm,-4.88mm) on Top Layer And Text "C9" (-4.751mm,-5.048mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3053.82mil|Location2.X=3065.07mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3053.82mil|Location2.X=3065.07mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C6-2(-3.694mm,-4.88mm) on Top Layer And Track (-3.11mm,-5.502mm)(-3.11mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3049.97mil|Location2.X=3061.22mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3049.97mil|Location2.X=3061.22mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C6-2(-3.694mm,-4.88mm) on Top Layer And Track (-3.288mm,-4.232mm)(-3.288mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3017.97mil|Location2.X=3029.22mil|Location1.Y=2502.595mil|Location2.Y=2513.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3017.97mil|Location2.X=3029.22mil|Location1.Y=2502.595mil|Location2.Y=2513.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C6-2(-3.694mm,-4.88mm) on Top Layer And Track (-4.101mm,-4.232mm)(-4.101mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3052.67mil|Location2.X=3063.92mil|Location1.Y=2459.91mil|Location2.Y=2471.16mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3052.67mil|Location2.X=3063.92mil|Location1.Y=2459.91mil|Location2.Y=2471.16mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.071mm &lt; 0.254mm) Between Pad C6-2(-3.694mm,-4.88mm) on Top Layer And Track (-4.278mm,-5.502mm)(-3.11mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3014.119mil|Location2.X=3025.369mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3014.119mil|Location2.X=3025.369mil|Location1.Y=2461.303mil|Location2.Y=2472.553mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C6-2(-3.694mm,-4.88mm) on Top Layer And Track (-4.278mm,-5.502mm)(-4.278mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.465mil|Location2.X=2967.715mil|Location1.Y=2520.36mil|Location2.Y=2531.61mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.465mil|Location2.X=2967.715mil|Location1.Y=2520.36mil|Location2.Y=2531.61mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C7-1(-6.167mm,-3.38mm) on Top Layer And Track (-5.583mm,-5.502mm)(-5.583mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2952.614mil|Location2.X=2963.864mil|Location1.Y=2518.439mil|Location2.Y=2529.689mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2952.614mil|Location2.X=2963.864mil|Location1.Y=2518.439mil|Location2.Y=2529.689mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C7-1(-6.167mm,-3.38mm) on Top Layer And Track (-5.761mm,-4.232mm)(-5.761mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2920.615mil|Location2.X=2931.865mil|Location1.Y=2518.439mil|Location2.Y=2529.689mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2920.615mil|Location2.X=2931.865mil|Location1.Y=2518.439mil|Location2.Y=2529.689mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C7-1(-6.167mm,-3.38mm) on Top Layer And Track (-6.574mm,-4.232mm)(-6.574mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2917.913mil|Location2.X=2929.163mil|Location1.Y=2560.623mil|Location2.Y=2571.873mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2917.913mil|Location2.X=2929.163mil|Location1.Y=2560.623mil|Location2.Y=2571.873mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.045mm &lt; 0.254mm) Between Pad C7-1(-6.167mm,-3.38mm) on Top Layer And Track (-6.751mm,-2.784mm)(-5.583mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.045mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2916.764mil|Location2.X=2928.014mil|Location1.Y=2559.731mil|Location2.Y=2570.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2916.764mil|Location2.X=2928.014mil|Location1.Y=2559.731mil|Location2.Y=2570.981mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C7-1(-6.167mm,-3.38mm) on Top Layer And Track (-6.751mm,-5.502mm)(-6.751mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.465mil|Location2.X=2967.715mil|Location1.Y=2461.305mil|Location2.Y=2472.555mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.465mil|Location2.X=2967.715mil|Location1.Y=2461.305mil|Location2.Y=2472.555mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C7-2(-6.167mm,-4.88mm) on Top Layer And Track (-5.583mm,-5.502mm)(-5.583mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2952.614mil|Location2.X=2963.864mil|Location1.Y=2502.596mil|Location2.Y=2513.846mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2952.614mil|Location2.X=2963.864mil|Location1.Y=2502.596mil|Location2.Y=2513.846mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C7-2(-6.167mm,-4.88mm) on Top Layer And Track (-5.761mm,-4.232mm)(-5.761mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2920.615mil|Location2.X=2931.865mil|Location1.Y=2502.596mil|Location2.Y=2513.846mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2920.615mil|Location2.X=2931.865mil|Location1.Y=2502.596mil|Location2.Y=2513.846mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C7-2(-6.167mm,-4.88mm) on Top Layer And Track (-6.574mm,-4.232mm)(-6.574mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2955.315mil|Location2.X=2966.565mil|Location1.Y=2459.911mil|Location2.Y=2471.161mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2955.315mil|Location2.X=2966.565mil|Location1.Y=2459.911mil|Location2.Y=2471.161mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.071mm &lt; 0.254mm) Between Pad C7-2(-6.167mm,-4.88mm) on Top Layer And Track (-6.751mm,-5.502mm)(-5.583mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2916.764mil|Location2.X=2928.014mil|Location1.Y=2500.675mil|Location2.Y=2511.925mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2916.764mil|Location2.X=2928.014mil|Location1.Y=2500.675mil|Location2.Y=2511.925mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C7-2(-6.167mm,-4.88mm) on Top Layer And Track (-6.751mm,-5.502mm)(-6.751mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2859.107mil|Location2.X=2870.357mil|Location1.Y=2559.728mil|Location2.Y=2570.978mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2859.107mil|Location2.X=2870.357mil|Location1.Y=2559.728mil|Location2.Y=2570.978mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C8-1(-8.64mm,-3.38mm) on Top Layer And Track (-8.056mm,-2.784mm)(-8.056mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2855.258mil|Location2.X=2866.508mil|Location1.Y=2518.437mil|Location2.Y=2529.687mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2855.258mil|Location2.X=2866.508mil|Location1.Y=2518.437mil|Location2.Y=2529.687mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C8-1(-8.64mm,-3.38mm) on Top Layer And Track (-8.234mm,-4.232mm)(-8.234mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2823.257mil|Location2.X=2834.507mil|Location1.Y=2518.437mil|Location2.Y=2529.687mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2823.257mil|Location2.X=2834.507mil|Location1.Y=2518.437mil|Location2.Y=2529.687mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C8-1(-8.64mm,-3.38mm) on Top Layer And Track (-9.046mm,-4.232mm)(-9.046mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2820.557mil|Location2.X=2831.807mil|Location1.Y=2560.622mil|Location2.Y=2571.872mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2820.557mil|Location2.X=2831.807mil|Location1.Y=2560.622mil|Location2.Y=2571.872mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.045mm &lt; 0.254mm) Between Pad C8-1(-8.64mm,-3.38mm) on Top Layer And Track (-9.224mm,-2.784mm)(-8.056mm,-2.784mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.045mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2819.407mil|Location2.X=2830.657mil|Location1.Y=2520.358mil|Location2.Y=2531.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2819.407mil|Location2.X=2830.657mil|Location1.Y=2520.358mil|Location2.Y=2531.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C8-1(-8.64mm,-3.38mm) on Top Layer And Track (-9.224mm,-2.784mm)(-9.224mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2859.107mil|Location2.X=2870.357mil|Location1.Y=2500.672mil|Location2.Y=2511.922mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2859.107mil|Location2.X=2870.357mil|Location1.Y=2500.672mil|Location2.Y=2511.922mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C8-2(-8.64mm,-4.88mm) on Top Layer And Track (-8.056mm,-2.784mm)(-8.056mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2855.257mil|Location2.X=2866.507mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2855.257mil|Location2.X=2866.507mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C8-2(-8.64mm,-4.88mm) on Top Layer And Track (-8.234mm,-4.232mm)(-8.234mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2823.257mil|Location2.X=2834.507mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2823.257mil|Location2.X=2834.507mil|Location1.Y=2502.594mil|Location2.Y=2513.844mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad C8-2(-8.64mm,-4.88mm) on Top Layer And Track (-9.046mm,-4.232mm)(-9.046mm,-4.028mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2819.406mil|Location2.X=2830.656mil|Location1.Y=2461.302mil|Location2.Y=2472.552mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2819.406mil|Location2.X=2830.656mil|Location1.Y=2461.302mil|Location2.Y=2472.552mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad C8-2(-8.64mm,-4.88mm) on Top Layer And Track (-9.224mm,-2.784mm)(-9.224mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2857.957mil|Location2.X=2869.207mil|Location1.Y=2459.909mil|Location2.Y=2471.159mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2857.957mil|Location2.X=2869.207mil|Location1.Y=2459.909mil|Location2.Y=2471.159mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.071mm &lt; 0.254mm) Between Pad C8-2(-8.64mm,-4.88mm) on Top Layer And Track (-9.224mm,-5.502mm)(-8.056mm,-5.502mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3122.555mil|Location2.X=3130.222mil|Location1.Y=2281.191mil|Location2.Y=2288.858mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3122.555mil|Location2.X=3130.222mil|Location1.Y=2281.191mil|Location2.Y=2288.858mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C9-1(-2.91mm,-9.23mm) on Top Layer And Text "+5V" (-0.69mm,-11.333mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3047.961mil|Location2.X=3055.628mil|Location1.Y=2272.151mil|Location2.Y=2279.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3047.961mil|Location2.X=3055.628mil|Location1.Y=2272.151mil|Location2.Y=2279.818mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C9-1(-2.91mm,-9.23mm) on Top Layer And Text "GND" (-3.04mm,-11.333mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3050.891mil|Location2.X=3058.558mil|Location1.Y=2272.151mil|Location2.Y=2279.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3050.891mil|Location2.X=3058.558mil|Location1.Y=2272.151mil|Location2.Y=2279.818mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C9-1(-2.91mm,-9.23mm) on Top Layer And Track (-3.31mm,-11.43mm)(-3.31mm,-7.03mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3307.594mil|Location2.X=3315.261mil|Location1.Y=2272.151mil|Location2.Y=2279.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3307.594mil|Location2.X=3315.261mil|Location1.Y=2272.151mil|Location2.Y=2279.818mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C9-2(2.89mm,-9.23mm) on Top Layer And Text "DIN" (4.01mm,-11.2mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3246.56mil|Location2.X=3254.227mil|Location1.Y=2272.151mil|Location2.Y=2279.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3246.56mil|Location2.X=3254.227mil|Location1.Y=2272.151mil|Location2.Y=2279.818mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C9-2(2.89mm,-9.23mm) on Top Layer And Text "DOUT" (1.66mm,-12.133mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.734mil|Location2.X=3318.4mil|Location1.Y=2272.151mil|Location2.Y=2279.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.734mil|Location2.X=3318.4mil|Location1.Y=2272.151mil|Location2.Y=2279.818mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C9-2(2.89mm,-9.23mm) on Top Layer And Track (3.29mm,-12.53mm)(3.29mm,-5.93mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3272.95mil|Location2.X=3284.2mil|Location1.Y=2169.959mil|Location2.Y=2181.209mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3272.95mil|Location2.X=3284.2mil|Location1.Y=2169.959mil|Location2.Y=2181.209mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.246mm &lt; 0.254mm) Between Pad H1-1(3.026mm,-13.553mm) on Multi-Layer And Track (-2.21mm,-12.53mm)(3.29mm,-12.53mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.246mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3308.942mil|Location2.X=3320.192mil|Location1.Y=2169.959mil|Location2.Y=2181.209mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3308.942mil|Location2.X=3320.192mil|Location1.Y=2169.959mil|Location2.Y=2181.209mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.246mm &lt; 0.254mm) Between Pad H1-1(3.026mm,-13.553mm) on Multi-Layer And Track (3.29mm,-12.53mm)(3.29mm,-5.93mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.246mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3302.249mil|Location2.X=3313.499mil|Location1.Y=2170.025mil|Location2.Y=2181.275mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3302.249mil|Location2.X=3313.499mil|Location1.Y=2170.025mil|Location2.Y=2181.275mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.243mm &lt; 0.254mm) Between Pad H1-1(3.77mm,-13.55mm) on Multi-Layer And Track (-2.21mm,-12.53mm)(3.29mm,-12.53mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.243mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3308.942mil|Location2.X=3320.192mil|Location1.Y=2170.025mil|Location2.Y=2181.275mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3308.942mil|Location2.X=3320.192mil|Location1.Y=2170.025mil|Location2.Y=2181.275mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.243mm &lt; 0.254mm) Between Pad H1-1(3.77mm,-13.55mm) on Multi-Layer And Track (3.29mm,-12.53mm)(3.29mm,-5.93mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.243mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3219.8mil|Location2.X=3231.05mil|Location1.Y=2169.965mil|Location2.Y=2181.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3219.8mil|Location2.X=3231.05mil|Location1.Y=2169.965mil|Location2.Y=2181.215mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.246mm &lt; 0.254mm) Between Pad H1-2(1.026mm,-13.553mm) on Multi-Layer And Track (-2.21mm,-12.53mm)(3.29mm,-12.53mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.246mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3229.414mil|Location2.X=3240.664mil|Location1.Y=2170.03mil|Location2.Y=2181.28mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3229.414mil|Location2.X=3240.664mil|Location1.Y=2170.03mil|Location2.Y=2181.28mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.243mm &lt; 0.254mm) Between Pad H1-2(1.27mm,-13.55mm) on Multi-Layer And Track (-2.21mm,-12.53mm)(3.29mm,-12.53mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.243mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3141.06mil|Location2.X=3152.31mil|Location1.Y=2169.965mil|Location2.Y=2181.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3141.06mil|Location2.X=3152.31mil|Location1.Y=2169.965mil|Location2.Y=2181.215mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.246mm &lt; 0.254mm) Between Pad H1-3(-0.974mm,-13.553mm) on Multi-Layer And Track (-2.21mm,-12.53mm)(3.29mm,-12.53mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.246mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3130.989mil|Location2.X=3142.239mil|Location1.Y=2170.03mil|Location2.Y=2181.28mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3130.989mil|Location2.X=3142.239mil|Location1.Y=2170.03mil|Location2.Y=2181.28mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.243mm &lt; 0.254mm) Between Pad H1-3(-1.23mm,-13.55mm) on Multi-Layer And Track (-2.21mm,-12.53mm)(3.29mm,-12.53mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.243mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3401.577mil|Location2.X=3412.827mil|Location1.Y=2185.714mil|Location2.Y=2196.964mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3401.577mil|Location2.X=3412.827mil|Location1.Y=2185.714mil|Location2.Y=2196.964mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad R1-1(6.147mm,-11.88mm) on Bottom Layer And Track (5.563mm,-12.476mm)(5.563mm,-9.758mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3440.128mil|Location2.X=3451.378mil|Location1.Y=2184.82mil|Location2.Y=2196.07mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3440.128mil|Location2.X=3451.378mil|Location1.Y=2184.82mil|Location2.Y=2196.07mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.045mm &lt; 0.254mm) Between Pad R1-1(6.147mm,-11.88mm) on Bottom Layer And Track (5.563mm,-12.476mm)(6.731mm,-12.476mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.045mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3405.427mil|Location2.X=3416.677mil|Location1.Y=2227.005mil|Location2.Y=2238.255mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3405.427mil|Location2.X=3416.677mil|Location1.Y=2227.005mil|Location2.Y=2238.255mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad R1-1(6.147mm,-11.88mm) on Bottom Layer And Track (5.741mm,-11.232mm)(5.741mm,-11.028mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3437.427mil|Location2.X=3448.677mil|Location1.Y=2227.005mil|Location2.Y=2238.255mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3437.427mil|Location2.X=3448.677mil|Location1.Y=2227.005mil|Location2.Y=2238.255mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad R1-1(6.147mm,-11.88mm) on Bottom Layer And Track (6.554mm,-11.232mm)(6.554mm,-11.028mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.278mil|Location2.X=3452.528mil|Location1.Y=2185.714mil|Location2.Y=2196.964mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.278mil|Location2.X=3452.528mil|Location1.Y=2185.714mil|Location2.Y=2196.964mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad R1-1(6.147mm,-11.88mm) on Bottom Layer And Track (6.731mm,-12.476mm)(6.731mm,-9.758mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3401.577mil|Location2.X=3412.827mil|Location1.Y=2244.769mil|Location2.Y=2256.019mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3401.577mil|Location2.X=3412.827mil|Location1.Y=2244.769mil|Location2.Y=2256.019mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad R1-2(6.147mm,-10.38mm) on Bottom Layer And Track (5.563mm,-12.476mm)(5.563mm,-9.758mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3402.727mil|Location2.X=3413.977mil|Location1.Y=2285.532mil|Location2.Y=2296.782mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3402.727mil|Location2.X=3413.977mil|Location1.Y=2285.532mil|Location2.Y=2296.782mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.071mm &lt; 0.254mm) Between Pad R1-2(6.147mm,-10.38mm) on Bottom Layer And Track (5.563mm,-9.758mm)(6.731mm,-9.758mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3405.427mil|Location2.X=3416.677mil|Location1.Y=2242.847mil|Location2.Y=2254.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3405.427mil|Location2.X=3416.677mil|Location1.Y=2242.847mil|Location2.Y=2254.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad R1-2(6.147mm,-10.38mm) on Bottom Layer And Track (5.741mm,-11.232mm)(5.741mm,-11.028mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3437.427mil|Location2.X=3448.677mil|Location1.Y=2242.847mil|Location2.Y=2254.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3437.427mil|Location2.X=3448.677mil|Location1.Y=2242.847mil|Location2.Y=2254.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.254mm) Between Pad R1-2(6.147mm,-10.38mm) on Bottom Layer And Track (6.554mm,-11.232mm)(6.554mm,-11.028mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.278mil|Location2.X=3452.528mil|Location1.Y=2244.769mil|Location2.Y=2256.019mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.278mil|Location2.X=3452.528mil|Location1.Y=2244.769mil|Location2.Y=2256.019mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.058mm &lt; 0.254mm) Between Pad R1-2(6.147mm,-10.38mm) on Bottom Layer And Track (6.731mm,-12.476mm)(6.731mm,-9.758mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.058mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID1QCZ0CFLDQ3GM0GJFOMC0SL0TEPIBARCYFZA1F4C45SV4L5P4FJ"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3101.834mil|Location2.X=3113.084mil|Location1.Y=2524.359mil|Location2.Y=2535.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3101.834mil|Location2.X=3113.084mil|Location1.Y=2524.359mil|Location2.Y=2535.609mil|Absolute=True">Silk To Silk Clearance Constraint: (0.228mm &lt; 0.254mm) Between Text "C9" (-4.751mm,-5.048mm) on Top Overlay And Track (-1.806mm,-2.784mm)(-1.806mm,-5.502mm) on Top Overlay Silk Text to Silk Clearance [0.228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3058.762mil|Location2.X=3066.428mil|Location1.Y=2481.549mil|Location2.Y=2489.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3058.762mil|Location2.X=3066.428mil|Location1.Y=2481.549mil|Location2.Y=2489.216mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C9" (-4.751mm,-5.048mm) on Top Overlay And Track (-3.11mm,-5.502mm)(-3.11mm,-2.784mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3054.147mil|Location2.X=3061.814mil|Location1.Y=2516.154mil|Location2.Y=2523.82mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3054.147mil|Location2.X=3061.814mil|Location1.Y=2516.154mil|Location2.Y=2523.82mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C9" (-4.751mm,-5.048mm) on Top Overlay And Track (-3.288mm,-4.232mm)(-3.288mm,-4.028mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3012.762mil|Location2.X=3020.428mil|Location1.Y=2536.147mil|Location2.Y=2543.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3012.762mil|Location2.X=3020.428mil|Location1.Y=2536.147mil|Location2.Y=2543.814mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C9" (-4.751mm,-5.048mm) on Top Overlay And Track (-4.278mm,-5.502mm)(-4.278mm,-2.784mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.734mil|Location2.X=3318.4mil|Location1.Y=2233.962mil|Location2.Y=2241.629mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.734mil|Location2.X=3318.4mil|Location1.Y=2233.962mil|Location2.Y=2241.629mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "DIN" (4.01mm,-11.2mm) on Top Overlay And Track (3.29mm,-12.53mm)(3.29mm,-5.93mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3213.283mil|Location2.X=3224.533mil|Location1.Y=2188.646mil|Location2.Y=2199.896mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3213.283mil|Location2.X=3224.533mil|Location1.Y=2188.646mil|Location2.Y=2199.896mil|Absolute=True">Silk To Silk Clearance Constraint: (0.195mm &lt; 0.254mm) Between Text "DOUT" (1.66mm,-12.133mm) on Top Overlay And Track (-2.21mm,-12.53mm)(3.29mm,-12.53mm) on Top Overlay Silk Text to Silk Clearance [0.195mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3050.891mil|Location2.X=3058.558mil|Location1.Y=2224.907mil|Location2.Y=2232.574mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3050.891mil|Location2.X=3058.558mil|Location1.Y=2224.907mil|Location2.Y=2232.574mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "GND" (-3.04mm,-11.333mm) on Top Overlay And Track (-3.31mm,-11.43mm)(-2.21mm,-12.53mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3050.891mil|Location2.X=3058.558mil|Location1.Y=2228.714mil|Location2.Y=2236.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3050.891mil|Location2.X=3058.558mil|Location1.Y=2228.714mil|Location2.Y=2236.381mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "GND" (-3.04mm,-11.333mm) on Top Overlay And Track (-3.31mm,-11.43mm)(-3.31mm,-7.03mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDMCBBDQVW1SN0LI5W1SGRUWJERHTZZC4UQWJ10FO0W51VUHLZIOI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2918.464mil|Location2.X=15820mil|Location1.Y=1859.276mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2918.464mil|Location2.X=15820mil|Location1.Y=1859.276mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Component H1-Header 4P 2.54 + 2.0 Duc Cong (3.745mm,-13.575mm) on Top Layer And Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3296.457mil|Location2.X=15820mil|Location1.Y=2864.764mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3296.457mil|Location2.X=15820mil|Location1.Y=2864.764mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Component U1-WS2812B-B (7mm,7.5mm) on Top Layer And Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3296.457mil|Location2.X=15820mil|Location1.Y=3140.354mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3296.457mil|Location2.X=15820mil|Location1.Y=3140.354mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Component U2-WS2812B-B (7mm,14.5mm) on Top Layer And Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3020.866mil|Location2.X=15820mil|Location1.Y=3140.354mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3020.866mil|Location2.X=15820mil|Location1.Y=3140.354mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Component U3-WS2812B-B (0mm,14.5mm) on Top Layer And Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2745.276mil|Location2.X=15820mil|Location1.Y=3140.354mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2745.276mil|Location2.X=15820mil|Location1.Y=3140.354mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Component U4-WS2812B-B (-7mm,14.5mm) on Top Layer And Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2745.276mil|Location2.X=15820mil|Location1.Y=2864.763mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2745.276mil|Location2.X=15820mil|Location1.Y=2864.763mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Component U5-WS2812B-B (-7mm,7.5mm) on Top Layer And Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2745.275mil|Location2.X=15820mil|Location1.Y=2589.173mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2745.275mil|Location2.X=15820mil|Location1.Y=2589.173mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Component U6-WS2812B-B (-7mm,0.5mm) on Top Layer And Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3020.866mil|Location2.X=15820mil|Location1.Y=2589.173mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3020.866mil|Location2.X=15820mil|Location1.Y=2589.173mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Component U7-WS2812B-B (0mm,0.5mm) on Top Layer And Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3296.457mil|Location2.X=15820mil|Location1.Y=2589.173mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3296.457mil|Location2.X=15820mil|Location1.Y=2589.173mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Component U8-WS2812B-B (7mm,0.5mm) on Top Layer And Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3501.377mil|Location2.X=15820mil|Location1.Y=2460.139mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3501.377mil|Location2.X=15820mil|Location1.Y=2460.139mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) And SMT Small Component C1-100nF (8.67mm,-4.13mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.021mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.021mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) And SMT Small Component C2-100nF (6.197mm,-4.13mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3306.664mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3306.664mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) And SMT Small Component C3-100nF (3.724mm,-4.13mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3209.308mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3209.308mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) And SMT Small Component C4-100nF (1.251mm,-4.13mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3111.951mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3111.951mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) And SMT Small Component C5-100nF (-1.221mm,-4.13mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3014.595mil|Location2.X=15820mil|Location1.Y=2460.14mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3014.595mil|Location2.X=15820mil|Location1.Y=2460.14mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) And SMT Small Component C6-100nF (-3.694mm,-4.13mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2917.238mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2917.238mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) And SMT Small Component C7-100nF (-6.167mm,-4.13mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2819.882mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2819.882mil|Location2.X=15820mil|Location1.Y=2460.141mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) And SMT Small Component C8-100nF (-8.64mm,-4.13mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2987.732mil|Location2.X=15820mil|Location1.Y=2180.433mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2987.732mil|Location2.X=15820mil|Location1.Y=2180.433mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) And SMT Small Component C9-100uF (-0.01mm,-9.23mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3402.052mil|Location2.X=15820mil|Location1.Y=2185.551mil|Location2.Y=8195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\SS_Final\06. RingLED_Ver2\RGB_Ring_v2_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3402.052mil|Location2.X=15820mil|Location1.Y=2185.551mil|Location2.Y=8195mil|Absolute=True">Room Definition: Between Room RGB_Ring_v2_SCH (Bounding Region = (366.776mm, 188.849mm, 401.828mm, 208.153mm) (InComponentClass('RGB_Ring_v2_SCH')) And SMT Small Component R1-470 (6.147mm,-11.13mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

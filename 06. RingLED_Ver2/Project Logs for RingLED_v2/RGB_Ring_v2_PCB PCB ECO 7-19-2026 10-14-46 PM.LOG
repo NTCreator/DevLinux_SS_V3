@@ -1,0 +1,8 @@
+Change Component Footprint: Designator=C9 Old Footprint=tu nhom 6.3 (d) New Footprint=tu hoa 5mm
+Change component parameters: Designator = "C9" ("C9"); Footprint = "tu nhom 6.3 (d)"; UniqueID = "\FVARWILC" ("\FVARWILC")
+Change component parameters (AddParameter): Name = "Chung_Loai"; Value = "C?m"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ma_Hang"; Value = "MH008417"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? Hóa 100uF 16V 5x11MM"; VariantName = "[No Variations]"
